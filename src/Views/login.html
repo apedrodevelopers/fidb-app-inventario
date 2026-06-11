@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — Inventário</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="page-login">
+
+  <!-- action="/login" method="POST" → AuthController@login -->
+  <form action="#" method="POST" class="login-card">
+
+    <div class="login-logo"></div>
+    <h1>Bem-vindo de volta</h1>
+    <p class="login-subtitle">Entre com as suas credenciais para aceder ao sistema.</p>
+
+    <!-- Flash de erro: visível quando $_SESSION['erro'] estiver definido -->
+    <!-- <div class="flash flash-error">E-mail ou senha incorretos.</div> -->
+
+    <div class="field">
+      <label for="email">E-mail</label>
+      <input name="email" type="email" id="email" placeholder="seu@email.com" required />
+    </div>
+
+    <div class="field">
+      <label for="senha">Senha</label>
+      <input name="senha" type="password" id="senha" placeholder="••••••••" required />
+    </div>
+
+    <button type="submit" class="btn-login">Entrar</button>
+
+  </form>
+
+</body>
+</html>

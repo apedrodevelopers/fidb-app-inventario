@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Erro — Inventário</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-error">
+
+  <div class="error-card">
+
+    <div class="error-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M12 9v4M12 17h.01" stroke="#A03030" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="#A03030" stroke-width="1.8" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <!--
+      Código e mensagem dinâmicos via PHP:
+      $codigo  = $erro['codigo']    ?? 500
+      $titulo  = $erro['titulo']    ?? 'Erro interno'
+      $descricao = $erro['descricao'] ?? 'Ocorreu um erro inesperado.'
+
+      Exemplos de uso no Router / Controllers:
+        404 → Página não encontrada
+        403 → Acesso negado
+        500 → Erro interno do servidor
+    -->
+
+    <!-- 404 -->
+    <!--
+    <p class="error-code">Erro 404</p>
+    <h1 class="error-title">Página não encontrada</h1>
+    <p class="error-desc">A página que procuras não existe ou foi removida.</p>
+    -->
+
+    <!-- 403 -->
+    <!--
+    <p class="error-code">Erro 403</p>
+    <h1 class="error-title">Acesso negado</h1>
+    <p class="error-desc">Não tens permissão para aceder a esta página. Contacta o administrador.</p>
+    -->
+
+    <!-- 500 (default) -->
+    <p class="error-code">Erro 500</p>
+    <h1 class="error-title">Algo correu mal</h1>
+    <p class="error-desc">
+      Ocorreu um erro interno no servidor.
+      Se o problema persistir, verifique os logs do Apache ou contacte o administrador do sistema.
+    </p>
+
+    <div class="error-actions">
+      <a href="javascript:history.back()" class="btn-secondary">Voltar</a>
+      <a href="dashboard.html" class="btn-primary">Ir para o início</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
