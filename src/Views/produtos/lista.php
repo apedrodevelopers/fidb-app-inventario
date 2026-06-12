@@ -88,7 +88,7 @@ $produtos = ProdutoModel::getProdutos();
       <!-- <div class="flash flash-error">✗ Erro ao apagar o produto.</div> -->
 
       <!-- Filtros: action="/produtos" method="GET" → ProdutoController@index -->
-      <form action="/admin/produtos/lista" method="GET" class="toolbar">
+      <form action="#" method="GET" class="toolbar">
         <div class="search-wrap">
           <input class="search-input" type="text" name="pesquisa" placeholder="Pesquisar por nome…" value="" />
           <select class="filter-select" name="categoria_id">
