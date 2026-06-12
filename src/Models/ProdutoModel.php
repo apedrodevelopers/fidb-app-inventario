@@ -40,4 +40,19 @@ class ProdutoModel
 
         return $st->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function getProdutos(): array
+    {
+        $db = Database::getPDO();
+
+        $st = $db->query("
+            SELECT p.*, c.nome AS categoria FROM produtos p INNER JOIN categorias c ON (p.categoria_id = c.id) ORDER BY p.nome
+        ");
+
+        return $st->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function pesquisarProdutosPorNomeECategoria(string $nome): void {
+
+    }
 }
