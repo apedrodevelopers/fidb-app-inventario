@@ -1,10 +1,3 @@
-<?php
-
-use App\Models\ProdutoModel;
-
-$produtos = ProdutoModel::getProdutos();
-?>
-
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -88,19 +81,20 @@ $produtos = ProdutoModel::getProdutos();
       <!-- <div class="flash flash-error">✗ Erro ao apagar o produto.</div> -->
 
       <!-- Filtros: action="/produtos" method="GET" → ProdutoController@index -->
-      <form action="#" method="GET" class="toolbar">
+      <form action="/admin/produtos/lista" method="GET" class="toolbar">
         <div class="search-wrap">
           <input class="search-input" type="text" name="pesquisa" placeholder="Pesquisar por nome…" value="" />
           <select class="filter-select" name="categoria_id">
-            <option value="">Todas as categorias</option>
-            <!-- foreach ($categorias as $c) -->
-            <option value="1">Periféricos</option>
-            <option value="2">Cabos</option>
-            <option value="3">Armazenamento</option>
-            <option value="4">Monitores</option>
-            <option value="5">Redes</option>
-            <option value="6">Energia</option>
-            <!-- endforeach -->
+            <option value="0">Todas as categorias</option>
+
+            <?php
+            foreach ($categorias as $c) {
+            ?>
+              <option value="<?= $c['id'] ?>"> <?= $c['nome'] ?> </option>
+            <?php
+            }
+            ?>
+
           </select>
           <button class="btn-search" type="submit">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

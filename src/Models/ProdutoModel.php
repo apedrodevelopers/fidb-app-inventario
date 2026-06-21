@@ -41,18 +41,46 @@ class ProdutoModel
         return $st->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function getProdutos(): array
+    public static function getProdutos(string $pesquisa = ""): array
     {
         $db = Database::getPDO();
 
-        $st = $db->query("
-            SELECT p.*, c.nome AS categoria FROM produtos p INNER JOIN categorias c ON (p.categoria_id = c.id) ORDER BY p.nome
+        $st = $db->prepare("
+            SELECT p.*, c.nome AS categoria FROM produtos p 
+                INNER JOIN categorias c ON (p.categoria_id = c.id) 
+                WHERE p.nome LIKE :nome
+                ORDER BY p.nome
         ");
+
+        $nome = "%" . $pesquisa . "%";
+
+        $st->bindParam(":nome", $nome);
+
+        $st->execute();
 
         return $st->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function pesquisarProdutosPorNomeECategoria(string $nome): void {
+    public static function getProdutosByCategoria(int $categoriaId, string $pesquisa = ""): array
+    {
+        $db = Database::getPDO();
 
+        $st = $db->prepare("
+            SELECT p.*, c.nome AS categoria FROM produtos p 
+                INNER JOIN categorias c ON (p.categoria_id = c.id) 
+                WHERE c.id = :categoria_id AND p.nome LIKE :nome
+                ORDER BY p.nome
+        ");
+
+        $nome = "%" . $pesquisa . "%";
+
+        $st->bindParam(":categoria_id", $categoriaId);
+        $st->bindParam(":nome", $nome);
+
+        $st->execute();
+
+        return $st->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function pesquisarProdutosPorNomeECategoria(string $nome): void {}
 }

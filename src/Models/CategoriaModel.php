@@ -14,4 +14,13 @@ class CategoriaModel
 
         return (int) $st->fetch()["total_categorias"];
     }
+
+    public static function getCategorias(): array
+    {
+        $db = Database::getPDO();
+
+        $st = $db->query("SELECT id, nome FROM categorias ORDER BY nome");
+
+        return $st->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
