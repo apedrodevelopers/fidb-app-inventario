@@ -10,7 +10,7 @@ include "../src/Views/layouts/header.php";
     <h1>Produtos</h1>
     <p>Gerir produtos do inventário.</p>
   </div>
-  <a href="../login.html" class="logout-btn">Sair</a>
+  <a href="/logout" class="logout-btn">Sair</a>
 </div>
 
 <div class="content">

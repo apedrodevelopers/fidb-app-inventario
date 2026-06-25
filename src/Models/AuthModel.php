@@ -13,7 +13,7 @@ class AuthModel
         $db = Database::getPDO();
 
         $st = $db->prepare("
-            SELECT nome, perfil, email FROM utilizadores WHERE email = :email AND senha = :senha AND estado = 'ativo'
+            SELECT id, nome, perfil, email FROM utilizadores WHERE email = :email AND senha = :senha AND estado = 'ativo'
         ");
         $st->bindParam(":email", $email);
         $st->bindParam(":senha", $senha);

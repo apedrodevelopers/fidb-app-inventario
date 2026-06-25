@@ -40,13 +40,13 @@
           </svg>
           Categorias
         </a></li>
-      <li><a href="/admin/movimentos/lista/">
+      <li><a href="/admin/movimentos/lista">
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
             <path d="M7.5 1v13M3 5l4.5-4.5L12 5M3 10l4.5 4.5L12 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
           Movimentos
         </a></li>
-      <li><a href="/admin/utilizadores/lista/">
+      <li><a href="/admin/utilizadores/lista">
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
             <circle cx="7.5" cy="5" r="3" stroke="currentColor" stroke-width="1.4" />
             <path d="M2 13c0-3 2.5-5 5.5-5s5.5 2 5.5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />

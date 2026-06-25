@@ -22,6 +22,8 @@ $r->get("/admin/produtos/{id}/editar", "\App\Controllers\ProdutoController@edit"
 $r->post("/admin/produtos/{id}/editar", "\App\Controllers\ProdutoController@update");
 
 $r->get("/admin/movimentos/lista", "\App\Controllers\MovimentoController@index");
+$r->get("/admin/movimentos/create", "\App\Controllers\MovimentoController@create");
+$r->post("/admin/movimentos", "\App\Controllers\MovimentoController@store");
 
 $r->before("GET|POST", "/admin/.*", "\App\Controllers\AuthController@verificarAutenticacao");
 

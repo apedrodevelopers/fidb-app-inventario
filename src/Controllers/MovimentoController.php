@@ -57,9 +57,43 @@ class MovimentoController
         require "../src/Views/movimentos/lista.php";
     }
 
-    public function create (): void {
+    public function create(): void
+    {
         $produtos = ProdutoModel::getProdutos();
-        
+
         require "../src/Views/movimentos/novo.php";
+    }
+
+    public function store(): void
+    {
+        $produtoId = (int) $_POST["produto_id"];
+        $tipoMovimento = $_POST["tipo"];
+        $quantidade = (int) $_POST["quantidade"];
+        $obs = $_POST["observacao"];
+
+        if ($produtoId === 0) {
+            header("Location: /admin/movimentos/create");
+            exit;
+        }
+
+        if ($tipoMovimento === "saida") {
+            $produto = ProdutoModel::getProdutoById($produtoId);
+            $estoqueAtual = (int) $produto["quantidade"];
+
+            if ($estoqueAtual < $quantidade) {
+                header("Location: /admin/movimentos/create");
+                exit;
+            }
+        }
+
+        $utilizadorId = (int) $_SESSION["usuario-logado"]["id"];
+
+        if ($tipoMovimento === "saida") {
+            MovimentoModel::registarSaida($produtoId, $quantidade, $obs, $utilizadorId);
+        } else {
+            MovimentoModel::registarEntrada($produtoId, $quantidade, $obs, $utilizadorId);
+        }
+
+        header("Location: /admin/movimentos/lista");
     }
 }

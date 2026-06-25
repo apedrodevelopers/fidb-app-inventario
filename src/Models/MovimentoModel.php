@@ -161,4 +161,70 @@ class MovimentoModel
 
         return  $st->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function registarSaida(int $produtoId, int $quantidade, string $obs, int $utilizadorId): void
+    {
+        $db = Database::getPDO();
+
+        $st = $db->prepare(
+            "
+            INSERT INTO movimentos (produto_id, tipo, quantidade, observacao, utilizador_id) 
+            VALUES(:produto_id, :tipo, :quantidade, :observacao, :utilizador_id)"
+        );
+
+        $st->execute([
+            "produto_id" => $produtoId,
+            "tipo" => "saida",
+            "quantidade" => $quantidade,
+            "observacao" => $obs,
+            "utilizador_id" => $utilizadorId,
+        ]);
+
+        self::decrementarQuantidade($produtoId, $quantidade);
+    }
+
+    public static function registarEntrada(int $produtoId, int $quantidade, string $obs, int $utilizadorId): void
+    {
+        $db = Database::getPDO();
+
+        $st = $db->prepare(
+            "
+            INSERT INTO movimentos (produto_id, tipo, quantidade, observacao, utilizador_id) 
+            VALUES(:produto_id, :tipo, :quantidade, :observacao, :utilizador_id)"
+        );
+
+        $st->execute([
+            "produto_id" => $produtoId,
+            "tipo" => "entrada",
+            "quantidade" => $quantidade,
+            "observacao" => $obs,
+            "utilizador_id" => $utilizadorId,
+        ]);
+
+        self::incrementarQuantidade($produtoId, $quantidade);
+    }
+
+    public static function incrementarQuantidade(int $produtoId, int $quantidade): void
+    {
+        $db = Database::getPDO();
+
+        $st = $db->prepare("UPDATE produtos SET quantidade = quantidade + :quantidade WHERE id = :produto_id");
+
+        $st->execute([
+            "produto_id" => $produtoId,
+            "quantidade" => $quantidade,
+        ]);
+    }
+
+     public static function decrementarQuantidade(int $produtoId, int $quantidade): void
+    {
+        $db = Database::getPDO();
+
+        $st = $db->prepare("UPDATE produtos SET quantidade = quantidade - :quantidade WHERE id = :produto_id");
+
+        $st->execute([
+            "produto_id" => $produtoId,
+            "quantidade" => $quantidade,
+        ]);
+    }
 }

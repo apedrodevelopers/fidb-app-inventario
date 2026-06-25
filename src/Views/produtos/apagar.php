@@ -10,7 +10,7 @@ include "../src/Views/layouts/header.php";
     <h1>Apagar produto </h1>
     <p>Confirme a remoção do produto.</p>
   </div>
-  <a href="../login.html" class="logout-btn">Sair</a>
+  <a href="/logout" class="logout-btn">Sair</a>
 </div>
 
 <div class="content">
