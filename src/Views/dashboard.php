@@ -1,6 +1,7 @@
 <?php
 
 $caminhoCss = "../css/style.css";
+$painel = "dashboard";
 
 include "../src/Views/layouts/header.php";
 ?>

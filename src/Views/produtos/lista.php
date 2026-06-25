@@ -1,6 +1,7 @@
 <?php
 
 $caminhoCss = "../../css/style.css";
+$painel = "produtos";
 
 include "../src/Views/layouts/header.php";
 ?>

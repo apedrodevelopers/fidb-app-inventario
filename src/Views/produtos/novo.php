@@ -1,5 +1,6 @@
 <?php
 $caminhoCss = "../../css/style.css";
+$painel = "produtos";
 
 include "../src/Views/layouts/header.php";
 ?>
@@ -83,7 +84,7 @@ include "../src/Views/layouts/header.php";
     </div>
 
     <div class="form-actions-page">
-      <a href="lista.html" class="btn-secondary">Cancelar</a>
+      <a href="/admin/produtos/lista" class="btn-secondary">Cancelar</a>
       <button type="submit" class="btn-primary">
         <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
           <path d="M2 7l3.5 3.5L11 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
