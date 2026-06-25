@@ -70,4 +70,95 @@ class MovimentoModel
 
         return  $st->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function getMovimentosByTipoAndCategoria(string $tipo, int $categoriaId): array
+    {
+        $db = Database::getPDO();
+
+        $st = $db->prepare("
+            SELECT 
+                m.id,
+                p.nome,
+                c.nome AS categoria,
+                m.tipo,
+                m.quantidade,
+                m.observacao,
+                u.nome AS utilizador,
+                m.criado_em AS data
+            FROM 
+                movimentos m 
+                INNER JOIN produtos p ON (p.id = m.produto_id) 
+                INNER JOIN categorias c ON (c.id = p.categoria_id)
+                INNER JOIN utilizadores u ON (u.id = m.utilizador_id)
+            WHERE m.tipo = :tipo AND p.categoria_id = :categoria_id
+            ORDER BY p.nome
+        ");
+
+        $st->execute([
+            "tipo" => $tipo,
+            "categoria_id" => $categoriaId
+        ]);
+
+        return  $st->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getMovimentosByTipo(string $tipo): array
+    {
+        $db = Database::getPDO();
+
+        $st = $db->prepare("
+            SELECT 
+                m.id,
+                p.nome,
+                c.nome AS categoria,
+                m.tipo,
+                m.quantidade,
+                m.observacao,
+                u.nome AS utilizador,
+                m.criado_em AS data
+            FROM 
+                movimentos m 
+                INNER JOIN produtos p ON (p.id = m.produto_id) 
+                INNER JOIN categorias c ON (c.id = p.categoria_id)
+                INNER JOIN utilizadores u ON (u.id = m.utilizador_id)
+            WHERE m.tipo = :tipo
+            ORDER BY p.nome
+        ");
+
+        $st->execute([
+            "tipo" => $tipo,
+        ]);
+
+        return  $st->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getMovimentosByCategoria(string $categoriaId): array
+    {
+        $db = Database::getPDO();
+
+        $st = $db->prepare("
+            SELECT 
+                m.id,
+                p.nome,
+                c.nome AS categoria,
+                m.tipo,
+                m.quantidade,
+                m.observacao,
+                u.nome AS utilizador,
+                m.criado_em AS data
+            FROM 
+                movimentos m 
+                INNER JOIN produtos p ON (p.id = m.produto_id) 
+                INNER JOIN categorias c ON (c.id = p.categoria_id)
+                INNER JOIN utilizadores u ON (u.id = m.utilizador_id)
+            WHERE p.categoria_id = :categoria_id
+            ORDER BY p.nome
+        ");
+
+        $st->execute([
+            "categoria_id" => $categoriaId,
+        ]);
+
+        return  $st->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

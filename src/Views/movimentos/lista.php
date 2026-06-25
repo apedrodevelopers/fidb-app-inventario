@@ -59,23 +59,24 @@
     <div class="content">
 
       <!-- Filtros: action="/movimentos" method="GET" → MovimentoController@index -->
-      <form action="#" method="GET" class="toolbar">
+      <form action="/admin/movimentos/lista" method="GET" class="toolbar">
         <div class="search-wrap">
           <select class="filter-select" name="tipo">
-            <option value="">Todos os tipos</option>
+            <option value="0">Todos os tipos</option>
             <option value="entrada">Entrada</option>
             <option value="saida">Saída</option>
           </select>
           <select class="filter-select" name="categoria_id">
-            <option value="">Todas as categorias</option>
-            <!-- foreach ($categorias as $c) -->
-            <option value="1">Periféricos</option>
-            <option value="2">Cabos</option>
-            <option value="3">Armazenamento</option>
-            <option value="4">Monitores</option>
-            <option value="5">Redes</option>
-            <option value="6">Energia</option>
-            <!-- endforeach -->
+            <option value="0">Todas as categorias</option>
+
+            <?php
+            foreach ($categorias as $c) {
+            ?>
+              <option value="<?= $c['id'] ?>"> <?= $c['nome'] ?> </option>
+            <?php
+            }
+            ?>
+
           </select>
           <button class="btn-search" type="submit">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
