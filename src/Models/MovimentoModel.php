@@ -45,4 +45,29 @@ class MovimentoModel
 
         return  $st->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function getMovimentos(): array
+    {
+        $db = Database::getPDO();
+
+        $st = $db->query("
+            SELECT 
+                m.id,
+                p.nome,
+                c.nome AS categoria,
+                m.tipo,
+                m.quantidade,
+                m.observacao,
+                u.nome AS utilizador,
+                m.criado_em AS data
+            FROM 
+                movimentos m 
+                INNER JOIN produtos p ON (p.id = m.produto_id) 
+                INNER JOIN categorias c ON (c.id = p.categoria_id)
+                INNER JOIN utilizadores u ON (u.id = m.utilizador_id)
+            ORDER BY p.nome
+        ");
+
+        return  $st->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
