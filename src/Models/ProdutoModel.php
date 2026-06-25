@@ -82,5 +82,67 @@ class ProdutoModel
         return $st->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function pesquisarProdutosPorNomeECategoria(string $nome): void {}
+    public static function create(array $dados): void
+    {
+        $db = Database::getPDO();
+
+        $st = $db->prepare(
+            "
+        INSERT INTO produtos (nome, descricao, preco, quantidade, quantidade_minima, categoria_id) 
+        VALUES (:nome, :descricao, :preco, :quantidade, :quantidade_minima, :categoria_id)"
+        );
+
+        $st->execute($dados);
+    }
+
+    public static function getProdutoById(int $id): mixed
+    {
+        $db = Database::getPDO();
+
+        $st = $db->prepare("
+            SELECT p.*, c.nome AS categoria FROM produtos p 
+                INNER JOIN categorias c ON (p.categoria_id = c.id) 
+                WHERE p.id = :id
+        ");
+
+        $st->bindParam(":id", $id);
+
+        $st->execute();
+
+        return $st->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function delete(int $id): void
+    {
+        $db = Database::getPDO();
+
+        $st = $db->prepare("
+            DELETE FROM produtos WHERE id = :id
+        ");
+
+        $st->bindParam(":id", $id);
+
+        $st->execute();
+    }
+
+    public static function update(int $id, array $dados): void
+    {
+        $db = Database::getPDO();
+
+        $st = $db->prepare(
+            "
+        UPDATE produtos SET 
+            nome = :nome, 
+            descricao = :descricao, 
+            preco = :preco, 
+            quantidade = :quantidade,
+            quantidade_minima = :quantidade_minima , categoria_id = :categoria_id
+        WHERE id = :id
+        "
+        );
+
+        $dados["id"] = $id;
+
+        $st->execute($dados);
+    }
 }
